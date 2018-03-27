@@ -6,6 +6,7 @@ import business.model.ShowModel;
 import dataAccess.JDBConnectionWrapper;
 import dataAccess.dbmodel.ShowDto;
 import dataAccess.repository.IShowRepository;
+import dataAccess.repository.ShowRepositoryCacheDecorator;
 import dataAccess.repository.ShowRepositoryMySql;
 
 public class ShowService implements IShowService {
@@ -13,7 +14,8 @@ public class ShowService implements IShowService {
 	private IShowRepository repository;
 
 	public ShowService() {
-		this.repository = new ShowRepositoryMySql(new JDBConnectionWrapper("theater"));
+		this.repository = new ShowRepositoryCacheDecorator(
+				new ShowRepositoryMySql(new JDBConnectionWrapper("theater")));
 	}
 
 	@Override
