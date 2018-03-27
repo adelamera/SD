@@ -23,6 +23,4 @@ public interface ITicketService {
 
 	public abstract boolean cancelReservation(TicketModel ticket);
 
-	public abstract void exportTickets(String fileName, int idShow);
-
 }
