@@ -10,7 +10,7 @@ public interface ITicketService {
 	public abstract List<TicketModel> getAllTickets(int idShow);
 
 	public abstract TicketModel getTicketById(int idShow);
-	
+
 	public abstract boolean create(TicketModel ticket);
 
 	public abstract boolean update(TicketModel ticket);
@@ -24,5 +24,7 @@ public interface ITicketService {
 	public abstract boolean editSeat(TicketModel ticket, int seatRow, int seatNr);
 
 	public abstract boolean cancelReservation(TicketModel ticket);
+
+	public abstract boolean makeReservation(TicketModel ticket);
 
 }

@@ -144,4 +144,15 @@ public class TicketService implements ITicketService {
 		return ticket;
 	}
 
+	@Override
+	public boolean makeReservation(TicketModel ticket) {
+		if (ticket.getStatus().equals("free")) {
+			ticket.setStatus("reserved");
+			this.update(ticket);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

@@ -36,7 +36,11 @@ public class CashierWindow {
 		JButton edit = new JButton("EDIT SEAT");
 		edit.setBounds(250, 350, 250, 50);
 		panel.add(edit);
-		
+
+		JButton book = new JButton("MAKE RESERVATION");
+		book.setBounds(250, 450, 250, 50);
+		panel.add(book);
+
 		JButton back = new JButton("BACK");
 		back.setBounds(650, 430, 200, 50);
 		panel.add(back);
@@ -84,7 +88,18 @@ public class CashierWindow {
 			}
 
 		});
-		
+
+		book.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MakeReservationWindow mrw = new MakeReservationWindow();
+				mrw.makeFrame();
+
+			}
+
+		});
+
 		back.addActionListener(new ActionListener() {
 
 			@Override
@@ -97,6 +112,5 @@ public class CashierWindow {
 
 		principalFrame.setVisible(true);
 	}
-	
 
 }
