@@ -21,6 +21,14 @@ public class TicketService implements ITicketService {
 		this.showService = new ShowService();
 	}
 
+	public void setTicketRepository(TicketRepositoryMySql ticketRepository) {
+		this.repository = ticketRepository;
+	}
+
+	public void setShowService(ShowService showService) {
+		this.showService = showService;
+	}
+
 	@Override
 	public List<TicketModel> getAllTickets(int idShow) {
 		List<TicketDto> ticketsDto = repository.findByShow(idShow);
@@ -30,9 +38,25 @@ public class TicketService implements ITicketService {
 	}
 
 	@Override
-	public void update(TicketModel ticket) {
+	public boolean create(TicketModel ticket) {
 		TicketDto ticketDto = mapModel(ticket);
-		repository.update(ticketDto);
+		boolean created = repository.create(ticketDto);
+		if (created) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean update(TicketModel ticket) {
+		TicketDto ticketDto = mapModel(ticket);
+		boolean updated = repository.update(ticketDto);
+		if (updated) {
+			return true;
+		} else {
+			return false;
+		}
 
 	}
 
@@ -63,7 +87,7 @@ public class TicketService implements ITicketService {
 	}
 
 	@Override
-	public TicketModel sellTicket(ShowModel show) {
+	public String sellTicket(ShowModel show) {
 		TicketModel ticket = null;
 		List<TicketModel> availableTickets = this.getFreeTickets(show.getIdShow());
 		if (show.getNrTickets() > 0) {
@@ -72,9 +96,9 @@ public class TicketService implements ITicketService {
 			this.update(ticket);
 			show.setNrTickets(show.getNrTickets() - 1);
 			this.showService.update(show);
+			return ticket.toString();
 		} else
-			System.out.println("There are no tickets available");
-		return ticket;
+			return ("There are no tickets available");
 
 	}
 

@@ -35,20 +35,21 @@ public class ShowService implements IShowService {
 	}
 
 	@Override
-	public boolean create(ShowModel show) {
+	public int create(ShowModel show) {
 		ShowDto showDto = mapModel(show);
-		boolean created = repository.create(showDto);
-		if (created) {
+		int createdId = repository.create(showDto);
+		return createdId;
+	}
+
+	@Override
+	public boolean update(ShowModel show) {
+		ShowDto showDto = mapModel(show);
+		boolean updated = repository.update(showDto);
+		if (updated) {
 			return true;
 		} else {
 			return false;
 		}
-	}
-
-	@Override
-	public void update(ShowModel show) {
-		ShowDto showDto = mapModel(show);
-		repository.update(showDto);
 	}
 
 	@Override

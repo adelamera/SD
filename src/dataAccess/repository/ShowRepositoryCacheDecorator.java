@@ -15,7 +15,7 @@ public class ShowRepositoryCacheDecorator implements IShowRepository {
 	}
 
 	@Override
-	public boolean create(ShowDto show) {
+	public int create(ShowDto show) {
 		cache.invalidateCache();
 		return decoratedRepository.create(show);
 	}
@@ -39,9 +39,9 @@ public class ShowRepositoryCacheDecorator implements IShowRepository {
 	}
 
 	@Override
-	public void update(ShowDto show) {
+	public boolean update(ShowDto show) {
 		cache.invalidateCache();
-		decoratedRepository.update(show);
+		return decoratedRepository.update(show);
 
 	}
 

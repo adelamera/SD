@@ -17,6 +17,10 @@ public class CashierService implements ICashierService {
 
 	}
 
+	public void setCashierRepository(CashierRepositoryMySql cashierRepository) {
+		this.repository = cashierRepository;
+	}
+
 	@Override
 	public List<CashierModel> findAll() {
 		List<CashierDto> cashiersDto = repository.getAll();

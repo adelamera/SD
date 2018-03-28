@@ -10,14 +10,16 @@ public interface ITicketService {
 	public abstract List<TicketModel> getAllTickets(int idShow);
 
 	public abstract TicketModel getTicketById(int idShow);
+	
+	public abstract boolean create(TicketModel ticket);
 
-	public abstract void update(TicketModel ticket);
+	public abstract boolean update(TicketModel ticket);
 
 	public abstract List<TicketModel> getSoldTickets(int idShow);
 
 	public abstract List<TicketModel> getFreeTickets(int idShow);
 
-	public abstract TicketModel sellTicket(ShowModel show);
+	public abstract String sellTicket(ShowModel show);
 
 	public abstract boolean editSeat(TicketModel ticket, int seatRow, int seatNr);
 

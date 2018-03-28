@@ -10,9 +10,9 @@ public interface IShowService {
 
 	public abstract ShowModel findById(int id);
 
-	public abstract boolean create(ShowModel show);
+	public abstract int create(ShowModel show);
 
-	public void update(ShowModel show);
+	public boolean update(ShowModel show);
 
 	public void delete(int id);
 

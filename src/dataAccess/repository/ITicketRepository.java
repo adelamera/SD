@@ -19,6 +19,6 @@ public interface ITicketRepository {
 	public abstract List<TicketDto> findFreeTicketsShow(int idShow);
 
 	// update
-	public abstract void update(TicketDto ticket);
+	public abstract boolean update(TicketDto ticket);
 
 }

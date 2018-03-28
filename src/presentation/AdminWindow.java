@@ -64,6 +64,10 @@ public class AdminWindow {
 		export.setBounds(650, 50, 250, 50);
 		panel.add(export);
 
+		JButton add = new JButton("ADD TICKETS");
+		add.setBounds(650, 150, 250, 50);
+		panel.add(add);
+
 		JButton back = new JButton("BACK");
 		back.setBounds(770, 450, 200, 50);
 		panel.add(back);
@@ -164,6 +168,16 @@ public class AdminWindow {
 			public void actionPerformed(ActionEvent arg0) {
 				ExportWindow ew = new ExportWindow();
 				ew.exportFrame();
+			}
+
+		});
+
+		add.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				AddTicketsWindow atw = new AddTicketsWindow();
+				atw.addTicketsFrame();
 			}
 
 		});

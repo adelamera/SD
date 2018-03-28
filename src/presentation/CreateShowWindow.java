@@ -15,7 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import business.model.ShowModel;
+import business.model.TicketModel;
 import business.service.ShowService;
+import business.service.TicketService;
 
 public class CreateShowWindow {
 
@@ -141,9 +143,10 @@ public class CreateShowWindow {
 				showToCreate.setDate(date);
 				showToCreate.setNrTickets(nrTickets);
 				ShowService showService = new ShowService();
-				boolean created = showService.create(showToCreate);
-				if (created) {
+				int createdId = showService.create(showToCreate);
+				if (createdId != -1) {
 					successFrame.setVisible(true);
+					CreateShowWindow.addTickets(createdId, nrTickets);
 				} else {
 					errorFrame.setVisible(true);
 				}
@@ -163,5 +166,27 @@ public class CreateShowWindow {
 		});
 
 		principalFrame.setVisible(true);
+	}
+
+	public static void addTickets(int showId, int nrTickets) {
+		TicketService ticketService = new TicketService();
+		for (int i = 1; i <= 10; i++) {
+			if (nrTickets == 0) {
+				break;
+			} else {
+				for (int j = 1; j <= 10; j++) {
+					TicketModel ticket = new TicketModel();
+					ticket.setSeatRow(i);
+					ticket.setSeatNr(j);
+					ticket.setIdShow(showId);
+					ticketService.create(ticket);
+					nrTickets--;
+					if (nrTickets == 0) {
+						break;
+					}
+				}
+			}
+		}
+
 	}
 }

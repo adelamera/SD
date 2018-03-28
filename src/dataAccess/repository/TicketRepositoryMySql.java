@@ -48,7 +48,7 @@ public class TicketRepositoryMySql implements ITicketRepository {
 	}
 
 	@Override
-	public void update(TicketDto ticket) {
+	public boolean update(TicketDto ticket) {
 		Connection connection = connectionWrapper.getConnection();
 		PreparedStatement updateStatement = null;
 		try {
@@ -57,10 +57,12 @@ public class TicketRepositoryMySql implements ITicketRepository {
 			updateStatement = setStatement(updateStatement, ticket);
 			updateStatement.setInt(5, ticket.getIdTicket());
 			updateStatement.executeUpdate();
+			return true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return false;
 
 	}
 

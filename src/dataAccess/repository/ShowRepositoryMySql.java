@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,21 +39,25 @@ public class ShowRepositoryMySql implements IShowRepository {
 	}
 
 	@Override
-	public boolean create(ShowDto show) {
+	public int create(ShowDto show) {
 
 		Connection connection = connectionWrapper.getConnection();
 		PreparedStatement insertStatement = null;
+		int insertedId = -1;
 		try {
 			String sql = "INSERT INTO showt (title,genre,distributionList,date,nrTickets)" + " VALUES (?,?,?,?,?)";
-			insertStatement = connection.prepareStatement(sql);
+			insertStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			insertStatement = setStatement(insertStatement, show);
 			insertStatement.executeUpdate();
-			return true;
+			ResultSet rs = insertStatement.getGeneratedKeys();
+			if (rs.next()) {
+				insertedId = rs.getInt(1);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return insertedId;
 	}
 
 	@Override
@@ -96,7 +101,7 @@ public class ShowRepositoryMySql implements IShowRepository {
 	}
 
 	@Override
-	public void update(ShowDto show) {
+	public boolean update(ShowDto show) {
 		Connection connection = connectionWrapper.getConnection();
 		PreparedStatement updateStatement = null;
 		try {
@@ -105,11 +110,12 @@ public class ShowRepositoryMySql implements IShowRepository {
 			updateStatement = setStatement(updateStatement, show);
 			updateStatement.setInt(6, show.getIdShow());
 			updateStatement.executeUpdate();
+			return true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		return false;
 	}
 
 	@Override

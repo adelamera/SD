@@ -7,7 +7,7 @@ import dataAccess.dbmodel.ShowDto;
 public interface IShowRepository {
 
 	// create
-	public abstract boolean create(ShowDto show);
+	public abstract int create(ShowDto show);
 
 	// read
 	public abstract ShowDto getById(int idShow);
@@ -15,7 +15,7 @@ public interface IShowRepository {
 	public abstract List<ShowDto> getAll();
 
 	// update
-	public abstract void update(ShowDto show);
+	public abstract boolean update(ShowDto show);
 
 	// delete
 	public abstract boolean delete(int idShow);

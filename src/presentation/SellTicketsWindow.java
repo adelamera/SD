@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import business.model.ShowModel;
-import business.model.TicketModel;
 import business.service.ShowService;
 import business.service.TicketService;
 
@@ -42,11 +41,10 @@ public class SellTicketsWindow {
 		JTextArea ticketInfo = new JTextArea();
 		ticketInfo.setBounds(10, 10, 300, 300);
 		panel2.add(ticketInfo);
-		
+
 		JButton back = new JButton("BACK");
 		back.setBounds(650, 430, 200, 50);
 		panel.add(back);
-
 
 		ShowService showService = new ShowService();
 		List<ShowModel> allShows = showService.findAll();
@@ -63,15 +61,15 @@ public class SellTicketsWindow {
 			public void actionPerformed(ActionEvent arg0) {
 				ShowModel chosenShow = (ShowModel) shows.getSelectedItem();
 				TicketService ticketservice = new TicketService();
-				TicketModel ticket = ticketservice.sellTicket(chosenShow);
+				String ticket = ticketservice.sellTicket(chosenShow);
 				ticketInfo.setText("Ticket for show " + chosenShow.getTitle() + " ");
-				ticketInfo.append(ticket.toString());
+				ticketInfo.append(ticket);
 				ticketFrame.setVisible(true);
 
 			}
 
 		});
-		
+
 		back.addActionListener(new ActionListener() {
 
 			@Override
